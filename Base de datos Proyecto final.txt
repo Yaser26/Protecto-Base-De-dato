@@ -1,0 +1,116 @@
+
+create table carreras(
+    id int identity (1,1), 
+	nombre varchar (50) not null, 
+	siglas varchar (10) null, 
+	primary key (id)
+);
+select * from carrera;
+insert into carrera values('Ing. Sistema computacionales','ISC');
+insert into carrera values('Adm. de Empresa','ADE');
+insert into carrera values('Derecho','E');
+insert into carrera values('Disecho Grafico','DG');
+insert into carrera values('Ingeneria Industrial','II');
+insert into carrera values('Medicina','M');
+insert into carrera values('Ingeneria Civil','IC');
+insert into carrera values('Turismo','T');
+insert into carrera values('Contabilidad','C');
+insert into carrera values('Negocio y Comercio','NYC');
+
+create table alumunos(
+    id int identity (1,1), 
+    matricula char(7),
+	nombre varchar(30) not null, 
+	apellido varchar(30) not null,
+	idcarrera int not null
+	primary key (id)
+);
+
+alter table alumnos add idcarrera int not null;
+alter table alumnos add constraint FK_alumno_carrera
+                foreign key(idcarrera) references carreras(id); 
+
+
+select * from alumnos;
+insert into alumnos values('1234567','Juan','Perez',1);
+insert into alumnos values('2651363','Jose','Peralta',1);
+insert into alumnos values('8735339','Anni','Gomez',6);
+insert into alumnos values('1252473','Yaser','Cruz',3);
+insert into alumnos values('6541953','Martin','Matos',8);
+insert into alumnos values('0735255','Gabriel','Montilla',3);
+insert into alumnos values('4496632','Pablo','Martinez',1);
+insert into alumnos values('0877633','Paloma','Santana',5);
+insert into alumnos values('0733395','Nicole','Vargas',2);
+insert into alumnos values('1233356','Esther','Lachapelle',4);
+delete from alumnos where id=1; 
+
+
+
+create table materias(
+    id int identity(1,1), 
+	nombre varchar (30) not null, 
+	nom_corto varchar (5) null, 
+	primary key (id)
+);
+
+insert into materia values('progr. orientada a objetivos','poo');
+insert into materia values('Algebra Lineal','AL');
+insert into materia values('Fisica III','FIII');
+insert into materia values('Algebra Lineal','AL');
+insert into materia values('Base De Datos','BDD');
+insert into materia values('Ecuaciones Diferenciales','ED');
+insert into materia values('Inferencia Estadistica','IE');
+insert into materia values('Dibujo tecnico','DT');
+insert into materia values('sistema De calidad ','SDC');
+Insert into materia values('Ecologia Y Desarrollo','EYD');
+select *from materia;
+  
+
+create table cursa(
+    idalumno int,
+	idmateria int,
+	calif_final decimal (5,2)
+	primary key(idalumno,idmateria),
+	constraint FK_alumno_cursa foreign key(idalumno)
+	       references alumnos(id),
+    constraint FK_materia_cursa foreign key (idmateria)
+	       references materia(id)
+);
+insert into cursa values(3,2, null);
+insert into cursa values(2,1, null);
+insert into cursa values(4,6, null);
+insert into cursa values(5,3, null);
+insert into cursa values(1,4, null);
+insert into cursa values(7,3, null); 
+insert into cursa values(8,1, null);
+insert into cursa values(9,5, null);
+insert into cursa values(10,2, null);
+insert into cursa values(11,4, null); 
+
+select *from cursa; 
+
+create table domicilio(
+    id int identity (1,1),
+	calle varchar (30) not null, 
+	numero varchar (8) null,
+	idalumnos int not null
+	primary key (id)
+); 
+ 
+ alter table domicilios add idalumnos int not null
+ alter table domicilios add constraint GB_domicilio_alumno
+              foreign key(idalumno) references alumnos(id);
+
+
+
+ select * from domicilios
+ insert into domicilios values('Juan Tomas','10','3');
+ insert into domicilios values('Luis Amia Tio','10-b','5');
+ insert into domicilios values('Princial','12','1');
+ insert into domicilios values('Rojas','234','2');
+ insert into domicilios values('Manuel Tomas','633','4');
+ insert into domicilios values('Loma ortega','85','6');
+ insert into domicilios values('El Cratero','1','7');
+ insert into domicilios values('victoria','63-f','8');
+ insert into domicilios values('Paola Reyes','b-4','9');
+ insert into domicilios values('San Jose','45-v','10');
